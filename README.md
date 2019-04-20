@@ -17,20 +17,21 @@ Most ISPs block traffic to TCP port 25, therefore your only option is to use the
 &#35; of wget, undelimiter 'curl' and delimiter 'wget' below.  
 &#35; https://paste.debian.net/1078252  
 
-&#35; Put URL of mlist2.txt to download here after 'StatsURL=':  
+&#35; <b>Put URL of mlist2.txt to download here:</b>  
 StatsURL=https://www.sec3.net/echolot/mlist2.txt
+YamnURL=https://cloaked.pw/yamn/mlist2.txt
 
-&#35; Location of remailer_access file:  
+&#35; <b>Location of remailer_access file:</b>  
 DEST=/etc/postfix/remailer_access
 
 filePath=${0%/*}  # current file path
 
-&#35;curl https://www.sec3.net/echolot/mlist2.txt > $filePath/mlist2.aux  
-wget --no-check-certificate https://www.sec3.net/echolot/mlist2.txt -O $filePath/mlist2.aux  
+&#35;curl $StatsURL > $filePath/mlist2.aux  
+wget --no-check-certificate $StatsURL -O $filePath/mlist2.aux  
 grep \$remailer $filePath/mlist2.aux | cut -f 2 -d \< | cut -f 1 -d \> | xargs printf "%-60s OK\n" > $DEST
 
-&#35;curl https://cloaked.pw/yamn/mlist2.txt >> $filePath/mlist2.aux  
-wget --no-check-certificate https://cloaked.pw/yamn/mlist2.txt -O $filePath/mlist2.aux  
+&#35;curl $YamnURL >> $filePath/mlist2.aux  
+wget --no-check-certificate $YamnURL -O $filePath/mlist2.aux  
 grep \$remailer $filePath/mlist2.aux | cut -f 2 -d \< | cut -f 1 -d \> | xargs printf "%-60s OK\n" >> $DEST
 
 $(which postmap) $DEST
