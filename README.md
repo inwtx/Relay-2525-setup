@@ -20,12 +20,12 @@ I. Place this code into a file called RemailerAccess.sh:
 #! Put URL of mlist2.txt to download here after 'StatsURL=':  
 StatsURL=https://www.sec3.net/echolot/mlist2.txt
 
-#! Location of remailer_access file:
+#! Location of remailer_access file:  
 DEST=/etc/postfix/remailer_access
 
 filePath=${0%/*}  # current file path
 
-#!!curl https://www.sec3.net/echolot/mlist2.txt > $filePath/mlist2.aux
+#!curl https://www.sec3.net/echolot/mlist2.txt > $filePath/mlist2.aux
 wget --no-check-certificate https://www.sec3.net/echolot/mlist2.txt -O $filePath/mlist2.aux
 grep \$remailer $filePath/mlist2.aux | cut -f 2 -d \< | cut -f 1 -d \> | xargs printf "%-60s OK\n" > $DEST
 
@@ -38,12 +38,12 @@ $(which postmap) $DEST
 rm $filePath/mlist2.aux
 
 exit 0
-</code>
-II. Create this cronjob:
+  
+II. Create this cronjob:  
 0 6 * * * /etc/Servstats/RemailerAccess.sh &> /dev/null
   
-III. Create this file in /etc/postfix/
+III. Create this file in /etc/postfix/  
 remailer_access
   
-IV. Place this code in /etc/postfix/main.cf
-;
+IV. Place this code in /etc/postfix/main.cf  
+
