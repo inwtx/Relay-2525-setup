@@ -6,7 +6,7 @@ Most ISPs block traffic to TCP port 25, therefore your only option is to use the
 I. Place this code into a file called RemailerAccess.sh:
   
 #!/bin/bash  
-&#35;
+&#35;  
 &#35; This script updates a remailer_access file in order for    
 &#35; a server to be used as a relay to all remailers (only).  
 &#35; It determines the remailer addresses by downloading the  
@@ -42,8 +42,17 @@ exit 0
 II. Create this cronjob:  
 0 6 * * * /etc/Servstats/RemailerAccess.sh &> /dev/null
   
-III. Create this file in /etc/postfix/  
+III. Create this file in /etc/postfix/:  
 remailer_access
   
-IV. Place this code in /etc/postfix/main.cf  
+IV. Place this code in /etc/postfix/main.cf:  
+smtpd_relay_restrictions =  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;permit_mynetworks,  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;permit_sasl_authenticated,  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;check_recipient_access hash:/etc/postfix/remailer_access,  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;reject_unauth_destination  
+  
+IIV. Place this line in /etc/postfix/main.cf within 'smtpd_recipient_restrictions =':  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;check_recipient_access hash:/etc/postfix/remailer_access,  
+
 
