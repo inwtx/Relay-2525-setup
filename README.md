@@ -3,7 +3,7 @@ These instructions show how to setup a remailer server to be a port 2525 relay.
 
 Most ISPs block traffic to TCP port 25, therefore your only option is to use the ISP's outgoing SMTP servers.  Direct MX elsewhere is prohibited.  This can allow your ISP to monitor and/or log that you are sending messages to remailers.  Some remailer operators have therefore, opened port 2525 on their servers to allow sending message to known remailers, using the remailer server's MTA.
 
-I. Place this code into a file called RemailerAccess.sh:
+<b>I. Place this code into a file called RemailerAccess.sh:</b>
   
 #!/bin/bash  
 &#35;  
@@ -25,12 +25,12 @@ DEST=/etc/postfix/remailer_access
 
 filePath=${0%/*}  # current file path
 
-&#35;curl https://www.sec3.net/echolot/mlist2.txt > $filePath/mlist2.aux
-wget --no-check-certificate https://www.sec3.net/echolot/mlist2.txt -O $filePath/mlist2.aux
+&#35;curl https://www.sec3.net/echolot/mlist2.txt > $filePath/mlist2.aux  
+wget --no-check-certificate https://www.sec3.net/echolot/mlist2.txt -O $filePath/mlist2.aux  
 grep \$remailer $filePath/mlist2.aux | cut -f 2 -d \< | cut -f 1 -d \> | xargs printf "%-60s OK\n" > $DEST
 
-&#35;curl https://cloaked.pw/yamn/mlist2.txt >> $filePath/mlist2.aux
-wget --no-check-certificate https://cloaked.pw/yamn/mlist2.txt -O $filePath/mlist2.aux
+&#35;curl https://cloaked.pw/yamn/mlist2.txt >> $filePath/mlist2.aux  
+wget --no-check-certificate https://cloaked.pw/yamn/mlist2.txt -O $filePath/mlist2.aux  
 grep \$remailer $filePath/mlist2.aux | cut -f 2 -d \< | cut -f 1 -d \> | xargs printf "%-60s OK\n" >> $DEST
 
 $(which postmap) $DEST
@@ -39,20 +39,20 @@ rm $filePath/mlist2.aux
 
 exit 0
   
-II. Create this cronjob:  
+<b>II. Create this cronjob:</b>  
 0 6 * * * /etc/Servstats/RemailerAccess.sh &> /dev/null
   
-III. Create this file in /etc/postfix/:  
+<b>III. Create this file in /etc/postfix/:</b>  
 remailer_access
   
-IV. Place this code in /etc/postfix/main.cf:  
+<b>IV. Place this code in /etc/postfix/main.cf:</b>  
 smtpd_relay_restrictions =  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;permit_mynetworks,  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;permit_sasl_authenticated,  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;check_recipient_access hash:/etc/postfix/remailer_access,  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;reject_unauth_destination  
   
-IIV. Place this line in /etc/postfix/main.cf within 'smtpd_recipient_restrictions =':  
+<b>IIV. Place this line in /etc/postfix/main.cf within 'smtpd_recipient_restrictions =':</b>  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;check_recipient_access hash:/etc/postfix/remailer_access,  
 
 
