@@ -37,7 +37,7 @@ rm $filePath/mlist2.aux
 exit 0
   
 <b><i>II. Create this cronjob:</i></b>  
-0 6 * * * /etc/Servstats/RemailerAccess.sh &> /dev/null
+0 6 * * * /path/to/RemailerAccess.sh &> /dev/null
   
 <b><i>III. Create this file in /etc/postfix/:</i></b>  
 remailer_access
