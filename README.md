@@ -39,20 +39,20 @@ rm $filePath/mlist2.aux
 
 exit 0
   
-<b>II. Create this cronjob:</b>  
+<b><i>II. Create this cronjob:</i></b>  
 0 6 * * * /etc/Servstats/RemailerAccess.sh &> /dev/null
   
-<b>III. Create this file in /etc/postfix/:</b>  
+<b><i>III. Create this file in /etc/postfix/:</i></b>  
 remailer_access
   
-<b>IV. Place this code in /etc/postfix/main.cf:</b>  
+<b><i>IV. Place this code in /etc/postfix/main.cf:</i></b>  
 smtpd_relay_restrictions =  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;permit_mynetworks,  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;permit_sasl_authenticated,  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;check_recipient_access hash:/etc/postfix/remailer_access,  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;reject_unauth_destination  
   
-<b>IIV. Place this line in /etc/postfix/main.cf within 'smtpd_recipient_restrictions =':</b>  
+<b><i>IIV. Place this line in /etc/postfix/main.cf within 'smtpd_recipient_restrictions =':</i></b>  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;check_recipient_access hash:/etc/postfix/remailer_access,  
 
 
