@@ -15,7 +15,6 @@ Most ISPs block traffic to TCP port 25, therefore your only option is to use the
 &#35; Create the file remailer_access in your server's  
 &#35; /etc/postfix folder.  If you choose to use curl instead  
 &#35; of wget, undelimiter 'curl' and delimiter 'wget' below.  
-&#35; https://paste.debian.net/1078252  
 
 &#35; <b>Put URL of mlist2.txt to download here:</b>  
 StatsURL=https://www.sec3.net/echolot/mlist2.txt
