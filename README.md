@@ -6,30 +6,30 @@ Most ISPs block traffic to TCP port 25, therefore your only option is to use the
 I. Place this code into a file called RemailerAccess.sh:
   
 #!/bin/bash  
-&#35  
-#! This script updates a remailer_access file in order for    
-#! a server to be used as a relay to all remailers (only).  
-#! It determines the remailer addresses by downloading the  
-#! mlist2.txt file from the chosen echolot stats pinger  
-#! pointed to in the 'StatsURL=' parameter below.  
-#! Create the file remailer_access in your server's  
-#! /etc/postfix folder.  If you choose to use curl instead  
-#! of wget, undelimiter 'curl' and delimiter 'wget' below.  
-#! https://paste.debian.net/1078252  
+&#35;
+&#35; This script updates a remailer_access file in order for    
+&#35; a server to be used as a relay to all remailers (only).  
+&#35; It determines the remailer addresses by downloading the  
+&#35; mlist2.txt file from the chosen echolot stats pinger  
+&#35; pointed to in the 'StatsURL=' parameter below.  
+&#35; Create the file remailer_access in your server's  
+&#35; /etc/postfix folder.  If you choose to use curl instead  
+&#35; of wget, undelimiter 'curl' and delimiter 'wget' below.  
+&#35; https://paste.debian.net/1078252  
 
-#! Put URL of mlist2.txt to download here after 'StatsURL=':  
+&#35; Put URL of mlist2.txt to download here after 'StatsURL=':  
 StatsURL=https://www.sec3.net/echolot/mlist2.txt
 
-#! Location of remailer_access file:  
+&#35; Location of remailer_access file:  
 DEST=/etc/postfix/remailer_access
 
 filePath=${0%/*}  # current file path
 
-#!curl https://www.sec3.net/echolot/mlist2.txt > $filePath/mlist2.aux
+&#35;curl https://www.sec3.net/echolot/mlist2.txt > $filePath/mlist2.aux
 wget --no-check-certificate https://www.sec3.net/echolot/mlist2.txt -O $filePath/mlist2.aux
 grep \$remailer $filePath/mlist2.aux | cut -f 2 -d \< | cut -f 1 -d \> | xargs printf "%-60s OK\n" > $DEST
 
-#!curl https://cloaked.pw/yamn/mlist2.txt >> $filePath/mlist2.aux
+&#35;curl https://cloaked.pw/yamn/mlist2.txt >> $filePath/mlist2.aux
 wget --no-check-certificate https://cloaked.pw/yamn/mlist2.txt -O $filePath/mlist2.aux
 grep \$remailer $filePath/mlist2.aux | cut -f 2 -d \< | cut -f 1 -d \> | xargs printf "%-60s OK\n" >> $DEST
 
