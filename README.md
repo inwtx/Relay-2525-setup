@@ -16,11 +16,11 @@ Most ISPs block traffic to TCP port 25, therefore your only option is to use the
 # Create the file remailer_access in your server's  
 # /etc/postfix folder.  
 
-# <b>Put URLs of mlist2.txt to download here:</b>  
+# Put URLs of mlist2.txt to download here:  
 StatsURL=https://www.sec3.net/echolot/mlist2.txt  
 YamnURL=https://cloaked.pw/yamn/mlist2.txt
 
-# <b>Location of remailer_access file:</b>  
+# Location of remailer_access file:  
 DEST=/etc/postfix/remailer_access
 
 filePath=${0%/*}  # current file path
