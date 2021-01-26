@@ -5,6 +5,7 @@ Most ISPs block traffic to TCP port 25, therefore your only option is to use the
 
 <b><i>I. Place this code into a file called RemailerAccess.sh:</i></b>
   
+  ```
 #!/bin/bash  
 &#35;  
 &#35; This script updates a remailer_access file in order for    
@@ -36,6 +37,7 @@ rm $filePath/mlist2.aux
 
 exit 0
   
+```
 <b><i>II. Create this cronjob:</i></b>  
 0 6 * * * /etc/postfix/RemailerAccess.sh &> /dev/null
   
