@@ -7,20 +7,20 @@ Most ISPs block traffic to TCP port 25, therefore your only option is to use the
   
   ```
 #!/bin/bash  
-&#35;  
-&#35; This script updates a remailer_access file in order for    
-&#35; a server to be used as a relay to all remailers (only).  
-&#35; It determines the remailer addresses by downloading the  
-&#35; mlist2.txt file from the chosen echolot stats pinger  
-&#35; pointed to in the 'StatsURL=' parameter below.  
-&#35; Create the file remailer_access in your server's  
-&#35; /etc/postfix folder.  
+#  
+# This script updates a remailer_access file in order for    
+# a server to be used as a relay to all remailers (only).  
+# It determines the remailer addresses by downloading the  
+# mlist2.txt file from the chosen echolot stats pinger  
+# pointed to in the 'StatsURL=' parameter below.  
+# Create the file remailer_access in your server's  
+# /etc/postfix folder.  
 
-&#35; <b>Put URLs of mlist2.txt to download here:</b>  
+# <b>Put URLs of mlist2.txt to download here:</b>  
 StatsURL=https://www.sec3.net/echolot/mlist2.txt  
 YamnURL=https://cloaked.pw/yamn/mlist2.txt
 
-&#35; <b>Location of remailer_access file:</b>  
+# <b>Location of remailer_access file:</b>  
 DEST=/etc/postfix/remailer_access
 
 filePath=${0%/*}  # current file path
