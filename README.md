@@ -41,7 +41,7 @@ exit 0
 <b><i>II. Create this cronjob:</i></b>  
 0 6 * * * /etc/postfix/RemailerAccess.sh &> /dev/null
   
-<b><i>III. Create this file in /etc/postfix/:</i></b>  
+<b><i>III. Execute /etc/postfix/RemailerAccess.sh once manually to create this file in /etc/postfix/:</i></b>  
 remailer_access
   
 <b><i>IV. Place this code in /etc/postfix/main.cf:</i></b>  
